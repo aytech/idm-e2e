@@ -12,22 +12,27 @@ import static configuration.AppConstants.*;
 
 public class IndexPageStepDefinitions {
     @Given("^User is on index page$")
-    public void userIsOnIndexPage() throws Exception {
-        Configuration.readConfiguration();
-        if (BasePage.getEnvironment().equals(ENV_DEVELOPMENT)) {
-            Map<String, String> urls = Configuration.buildEnvironmentUrls();
-            System.out.println(
-                    String.format("Testing in development environment, GRID URL: %s, Client URL: %s",
-                            urls.get(GRID_KEY), urls.get(CLIENT_KEY)));
-            open(urls.get(GRID_KEY));
-            page(BasePage.class).loginToGrid();
-            open(urls.get(CLIENT_KEY));
-            page(BasePage.class).maximizeBrowserWindow();
-        } else {
-            System.out.println("Testing in staging environment, URL: " + IDM_CLIENT_STAGING_URL);
-            open(Configuration.getProperty(IDM_CLIENT_STAGING_URL));
-            page(BasePage.class).maximizeBrowserWindow();
-            page(BasePage.class).switchToIdmInMingle();
-        }
+    public void userIsOnIndexPage() {
+        System.out.println("Necessary variables:");
+        System.out.println("1: " + System.getenv("ENVIRONMENT"));
+        System.out.println("1: " + System.getenv("ENVIRONMENT"));
+        System.out.println("1: " + System.getenv("HOST"));
+        System.out.println("1: " + System.getenv("BASE_URL"));
+//        Configuration.readConfiguration();
+//        if (BasePage.getEnvironment().equals(ENV_DEVELOPMENT)) {
+//            Map<String, String> urls = Configuration.buildEnvironmentUrls();
+//            System.out.println(
+//                    String.format("Testing in development environment, GRID URL: %s, Client URL: %s",
+//                            urls.get(GRID_KEY), urls.get(CLIENT_KEY)));
+//            open(urls.get(GRID_KEY));
+//            page(BasePage.class).loginToGrid();
+//            open(urls.get(CLIENT_KEY));
+//            page(BasePage.class).maximizeBrowserWindow();
+//        } else {
+//            System.out.println("Testing in staging environment, URL: " + IDM_CLIENT_STAGING_URL);
+//            open(Configuration.getProperty(IDM_CLIENT_STAGING_URL));
+//            page(BasePage.class).maximizeBrowserWindow();
+//            page(BasePage.class).switchToIdmInMingle();
+//        }
     }
 }
