@@ -12,14 +12,14 @@ import static configuration.AppConstants.*;
 
 public class IndexPageStepDefinitions {
     @Given("^User is on index page$")
-    public void userIsOnIndexPage() {
+    public void userIsOnIndexPage() throws Exception {
+        String environment = System.getenv("E2E_ENVIRONMENT");
         System.out.println("Necessary variables:");
-        System.out.println("1: " + System.getenv("ENVIRONMENT"));
-        System.out.println("1: " + System.getenv("ENVIRONMENT"));
-        System.out.println("1: " + System.getenv("HOST"));
-        System.out.println("1: " + System.getenv("BASE_URL"));
+        System.out.println("Environment: " + System.getenv("E2E_ENVIRONMENT"));
+        System.out.println("Base URL: " + System.getenv("E2E_BASE_URL"));
 //        Configuration.readConfiguration();
-//        if (BasePage.getEnvironment().equals(ENV_DEVELOPMENT)) {
+        if (environment.equals(ENV_DEVELOPMENT)) {
+            System.out.println("Testing development!!!");
 //            Map<String, String> urls = Configuration.buildEnvironmentUrls();
 //            System.out.println(
 //                    String.format("Testing in development environment, GRID URL: %s, Client URL: %s",
@@ -33,6 +33,11 @@ public class IndexPageStepDefinitions {
 //            open(Configuration.getProperty(IDM_CLIENT_STAGING_URL));
 //            page(BasePage.class).maximizeBrowserWindow();
 //            page(BasePage.class).switchToIdmInMingle();
-//        }
+        }
+        if (environment.equals("staging")) {
+            open(System.getenv("E2E_BASE_URL"));
+            page(BasePage.class).maximizeBrowserWindow();
+            page(BasePage.class).switchToIdmInMingle();
+        }
     }
 }

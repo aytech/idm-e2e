@@ -104,10 +104,6 @@ public class BasePage {
         }
     }
 
-    public static String getEnvironment() throws IllegalAccessException {
-        return Configuration.getProperty(IDM_ENVIRONMENT);
-    }
-
     void clickButtonByText(String buttonText) {
         SelenideElement inforButtonSet = $(By.xpath(MODAL_BUTTON_SET));
         if (inforButtonSet.exists()) {

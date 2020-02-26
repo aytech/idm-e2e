@@ -47,7 +47,8 @@ tasks.withType(Test) {
 
 task chrome(type: Test) {
     systemProperties['selenide.browser'] = 'chrome'
-    systemProperties['selenide.headless'] = 'true'
+    systemProperties['selenide.headless'] = 'false'
+    systemProperties['webdriver.chrome.driver'] = 'C:\\bin\\chromedriver.exe'
 }
 
 task firefox(type: Test) {
