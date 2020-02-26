@@ -1,0 +1,1 @@
+docker-compose -f ./distributed/docker-compose-idm1-firefox.yaml up --abort-on-container-exit

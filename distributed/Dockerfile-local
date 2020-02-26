@@ -1,0 +1,12 @@
+FROM openjdk:8-jdk-alpine
+LABEL maintainer="Oleg Yapparov <oleg.yapparov@infor.com>"
+WORKDIR '/e2e'
+COPY ./gradle ./gradle
+COPY ./src ./src
+COPY ./build.gradle .
+COPY ./gradlew .
+COPY ./src/test/resources/Upload/1.jpg .
+COPY ./src/test/resources/Upload/2.jpg .
+COPY ./src/test/resources/configuration.local.sample ./configuration
+COPY ./src/test/resources/credentials.local.sample ./credentials
+ENTRYPOINT ./gradlew chrome -Pidm.configuration.path=/e2e/configuration -Pidm.credentials.path=/e2e/credentials -Premote=http://selenium-hub:4444/wd/hub

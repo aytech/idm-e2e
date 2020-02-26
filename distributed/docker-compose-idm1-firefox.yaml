@@ -1,0 +1,41 @@
+version: "3.5"
+networks:
+  idm-selenium:
+    driver: bridge
+    name: idm-selenium
+services:
+  selenium-hub:
+    image: selenium/hub:3.141.59-mercury
+    networks:
+      - idm-selenium
+    container_name: selenium-hub
+    ports:
+      - "4444:4444"
+    environment:
+      - GRID_TIMEOUT=3000
+      - GRID_BROWSER_TIMEOUT=0
+  firefox:
+    image: selenium/node-firefox:3.141.59-mercury
+    networks:
+      - idm-selenium
+    volumes:
+      - /dev/shm:/dev/shm
+    depends_on:
+      - selenium-hub
+    environment:
+      - HUB_HOST=selenium-hub
+      - HUB_PORT=4444
+      - SCREEN_WIDTH=1920
+      - SCREEN_HEIGHT=1080
+      - SCREEN_DEPTH=32
+  tests-firefox:
+    image: idmuser/e2e-idm1-firefox
+    networks:
+      - idm-selenium
+    volumes:
+      - c:/home/e2e/reports/firefox:/e2e/build/reports/
+    depends_on:
+      - selenium-hub
+    environment:
+      - HUB_HOST=selenium-hub
+      - HUB_PORT=4444

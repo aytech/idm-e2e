@@ -1,0 +1,45 @@
+version: "3.5"
+networks:
+  idm-selenium:
+    driver: bridge
+    name: idm-selenium
+services:
+  selenium-hub:
+    image: selenium/hub:3.141.59-vanadium
+    networks:
+      - idm-selenium
+    container_name: selenium-hub
+    ports:
+      - "4444:4444"
+    environment:
+      - GRID_TIMEOUT=3000
+      - GRID_BROWSER_TIMEOUT=0
+  chrome:
+    image: selenium/node-chrome:3.141.59-vanadium
+    networks:
+      - idm-selenium
+    volumes:
+      - /dev/shm:/dev/shm
+    depends_on:
+      - selenium-hub
+    environment:
+      - HUB_HOST=selenium-hub
+      - HUB_PORT=4444
+      - SCREEN_WIDTH=1920
+      - SCREEN_HEIGHT=1080
+      - SCREEN_DEPTH=32
+  tests-chrome:
+    build:
+      dockerfile: ./distributed/Dockerfile-chrome
+      context: ..
+    networks:
+      - idm-selenium
+    volumes:
+      - C:/home/e2e/reports/chrome:/e2e/build/reports/
+      - C:/home/e2e_credentials:/e2e/credentials
+      - C:/home/configuration:/e2e/configuration
+    depends_on:
+      - selenium-hub
+    environment:
+      - HUB_HOST=selenium-hub
+      - HUB_PORT=4444

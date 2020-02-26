@@ -1,0 +1,1 @@
+docker-compose -f ./distributed/docker-compose-idm1-chrome-dev.yaml up --build --abort-on-container-exit
