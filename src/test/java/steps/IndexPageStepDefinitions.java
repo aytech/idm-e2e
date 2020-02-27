@@ -1,6 +1,7 @@
 package steps;
 
 import configuration.Configuration;
+import configuration.SystemConfiguration;
 import cucumber.api.java.en.Given;
 import pages.BasePage;
 
@@ -13,12 +14,8 @@ import static configuration.AppConstants.*;
 public class IndexPageStepDefinitions {
     @Given("^User is on index page$")
     public void userIsOnIndexPage() throws Exception {
-        String environment = System.getenv("E2E_ENVIRONMENT");
-        System.out.println("Necessary variables:");
-        System.out.println("Environment: " + System.getenv("E2E_ENVIRONMENT"));
-        System.out.println("Base URL: " + System.getenv("E2E_BASE_URL"));
-//        Configuration.readConfiguration();
-        if (environment.equals(ENV_DEVELOPMENT)) {
+        SystemConfiguration.readConfiguration();
+        if (SystemConfiguration.environment.equals(ENV_DEVELOPMENT)) {
             System.out.println("Testing development!!!");
 //            Map<String, String> urls = Configuration.buildEnvironmentUrls();
 //            System.out.println(
@@ -34,8 +31,8 @@ public class IndexPageStepDefinitions {
 //            page(BasePage.class).maximizeBrowserWindow();
 //            page(BasePage.class).switchToIdmInMingle();
         }
-        if (environment.equals("staging")) {
-            open(System.getenv("E2E_BASE_URL"));
+        if (SystemConfiguration.environment.equals("staging")) {
+            open(SystemConfiguration.url);
             page(BasePage.class).maximizeBrowserWindow();
             page(BasePage.class).switchToIdmInMingle();
         }

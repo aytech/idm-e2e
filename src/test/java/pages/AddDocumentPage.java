@@ -4,6 +4,7 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import configuration.AppConstants;
 import configuration.Configuration;
+import configuration.SystemConfiguration;
 import configuration.XPathSelectors;
 import org.openqa.selenium.By;
 
@@ -29,7 +30,7 @@ public class AddDocumentPage extends BasePage {
         $(By.xpath(MODAL_PAGE_CONTAINER_NEW)).waitUntil(exist, DEFAULT_TIMEOUT);
     }
 
-    public void addDocument() throws IllegalAccessException {
+    public void addDocument() {
         clickAddDocumentButton();
         selectDocumentTypeForNewDocument();
         clickButtonByText(AppConstants.CREATE_BUTTON_TEXT);
@@ -41,11 +42,11 @@ public class AddDocumentPage extends BasePage {
         clickButtonByText(AppConstants.CREATE_BUTTON_TEXT);
     }
 
-    public void selectDocumentTypeForNewDocument() throws IllegalAccessException {
-        $(By.xpath(XPathSelectors.DOCUMENT_TYPE_DROPDOWN_ADD_DOCUMENT)).setValue((Configuration.getProperty(IDM_DOCUMENT_TYPE)));
+    public void selectDocumentTypeForNewDocument() {
+        $(By.xpath(XPathSelectors.DOCUMENT_TYPE_DROPDOWN_ADD_DOCUMENT)).setValue((SystemConfiguration.documentType));
         SelenideElement documentTypeList = $(By.xpath(DOCUMENT_TYPE_NEW_LIST));
         for (SelenideElement dropDownOption : documentTypeList.$$(By.tagName("option"))) {
-            if (dropDownOption.text().equals(Configuration.getProperty(IDM_DOCUMENT_TYPE))) {
+            if (dropDownOption.text().equals(SystemConfiguration.documentType)) {
                 dropDownOption.click();
                 break;
             }

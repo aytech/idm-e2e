@@ -1,6 +1,7 @@
 package steps;
 
 import configuration.Configuration;
+import configuration.SystemConfiguration;
 import cucumber.api.java.en.Then;
 import pages.*;
 
@@ -29,9 +30,9 @@ public class IONConfigurationStepDefinitions {
     }
 
     @Then("^User adds a document and verifies status$")
-    public void userAddsNewDocumentAndVerifyStatusOfTheDocumentWhenWorkflowIsTriggered() throws IllegalAccessException {
+    public void userAddsNewDocumentAndVerifyStatusOfTheDocumentWhenWorkflowIsTriggered() {
         page(AddDocumentPage.class).addDocumentForNewlyCreatedDocumentType();
-        page(DocumentDetailPage.class).uploadFileToDocument(Configuration.getProperty(IDM_FILENAME_PRIMARY));
+        page(DocumentDetailPage.class).uploadFileToDocument(SystemConfiguration.filePath);
         page(IONConfigurationPage.class).setStatus(DRAFT);
         page(DocumentDetailActionBarPage.class).saveDocument();
         page(IONConfigurationPage.class).switchToAttributesTab();

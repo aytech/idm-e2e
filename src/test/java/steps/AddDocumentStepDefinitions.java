@@ -2,6 +2,7 @@ package steps;
 
 import com.codeborne.selenide.Condition;
 import configuration.Configuration;
+import configuration.SystemConfiguration;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -23,10 +24,10 @@ public class AddDocumentStepDefinitions {
     }
 
     @When("^User creates new document with file$")
-    public void userCreatesNewDocumentWithFile() throws IllegalAccessException {
+    public void userCreatesNewDocumentWithFile() {
         page(AddDocumentPage.class).addDocument();
         DocumentDetailPage documentDetailPage = page(DocumentDetailPage.class);
-        documentDetailPage.uploadFileToDocument(Configuration.getProperty(IDM_FILENAME_PRIMARY));
+        documentDetailPage.uploadFileToDocument(SystemConfiguration.documentType);
         documentDetailPage.setNewDocumentName();
         page(DocumentDetailActionBarPage.class).saveDocument();
     }
@@ -50,7 +51,7 @@ public class AddDocumentStepDefinitions {
     public void userCreatesNewDocumentWithFileForNewlyCreatedDocumentType() throws IllegalAccessException {
         page(AddDocumentPage.class).addDocumentForNewlyCreatedDocumentType();
         DocumentDetailPage documentDetailPage = page(DocumentDetailPage.class);
-        documentDetailPage.uploadFileToDocument(Configuration.getProperty(IDM_FILENAME_PRIMARY));
+        documentDetailPage.uploadFileToDocument(SystemConfiguration.filePath);
         documentDetailPage.setNewDocumentName();
         page(DocumentDetailActionBarPage.class).saveDocument();
     }
@@ -271,7 +272,7 @@ public class AddDocumentStepDefinitions {
     public void userAddsADocumentAsPerRelatedDocumentRule() throws IllegalAccessException {
         page(AddDocumentPage.class).addDocumentForNewlyCreatedDocumentType();
         DocumentDetailPage page = page(DocumentDetailPage.class);
-        page.uploadFileToDocument(Configuration.getProperty(IDM_FILENAME_PRIMARY));
+        page.uploadFileToDocument(SystemConfiguration.filePath);
         page.setMappingValue();
         page(DocumentDetailActionBarPage.class).saveDocument();
     }
@@ -280,16 +281,16 @@ public class AddDocumentStepDefinitions {
     public void userAddsNewDocument() throws IllegalAccessException {
         page(AddDocumentPage.class).addDocumentForNewlyCreatedDocumentType();
         DocumentDetailPage page = page(DocumentDetailPage.class);
-        page.uploadFileToDocument(Configuration.getProperty(IDM_FILENAME_PRIMARY));
+        page.uploadFileToDocument(SystemConfiguration.filePath);
         page.setNewDocumentName();
         page(DocumentDetailActionBarPage.class).saveDocument();
     }
 
     @Then("^User creates two documents one with file and one without file$")
-    public void userCreatesTwoDocumentsOneWithFileAndOneWithoutFile() throws IllegalAccessException {
+    public void userCreatesTwoDocumentsOneWithFileAndOneWithoutFile() {
         page(AddDocumentPage.class).addDocumentForNewlyCreatedDocumentType();
         DocumentDetailPage documentDetailPage = page(DocumentDetailPage.class);
-        documentDetailPage.uploadFileToDocument(Configuration.getProperty(IDM_FILENAME_PRIMARY));
+        documentDetailPage.uploadFileToDocument(SystemConfiguration.filePath);
         documentDetailPage.setNewDocumentName();
         page(DocumentDetailActionBarPage.class).saveDocument();
         page(TabsPage.class).closeDocumentTabs();

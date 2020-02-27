@@ -35,11 +35,16 @@ services:
     networks:
       - idm-selenium
     volumes:
-      - C:/home/e2e/reports/chrome:/e2e/build/reports/
-      - C:/home/e2e_credentials:/e2e/credentials
-      - C:/home/configuration:/e2e/configuration
+      - /home/oleg/e2e/reports/chrome:/e2e/build/reports/
+#      - C:/home/e2e_credentials:/e2e/credentials
+#      - C:/home/configuration:/e2e/configuration
     depends_on:
       - selenium-hub
     environment:
       - HUB_HOST=selenium-hub
       - HUB_PORT=4444
+      - E2E_BASE_URL=https://nlbavwidm3.infor.com/infor
+      - E2E_ENVIRONMENT=staging
+      - E2E_DOCUMENT_TYPE=AA
+      - E2E_FILE_PATH=/e2e/1.jpg
+      - E2E_USER=oleg.yapparov@infor.com

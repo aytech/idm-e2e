@@ -7,4 +7,4 @@ COPY ./src/test/resources/Upload/1.jpg .
 COPY ./src/test/resources/Upload/2.jpg .
 # COPY ./src/test/resources/configuration.staging.sample ./configuration
 # COPY ./src/test/resources/credentials.sample ./credentials
-ENTRYPOINT gradle --rerun-tasks chrome -Pidm.configuration.path=configuration -Pidm.credentials.path=credentials -Premote=http://selenium-hub:4444/wd/hub
+ENTRYPOINT gradle --rerun-tasks chrome -Premote=http://selenium-hub:4444/wd/hub

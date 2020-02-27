@@ -1,6 +1,7 @@
 package utility;
 
 import configuration.Configuration;
+import configuration.SystemConfiguration;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -18,8 +19,8 @@ public class FileUtility {
         FileUtility.fileNamePDF = fileNamePDF;
     }
 
-    public static String getFileNamePrimary() throws IllegalAccessException {
-        String path = Configuration.getProperty(IDM_FILENAME_PRIMARY);
+    public static String getFileNamePrimary() {
+        String path = SystemConfiguration.filePath;
         return path.substring(path.lastIndexOf(File.separator) + 1);
     }
 

@@ -3,6 +3,7 @@ package steps;
 import com.codeborne.selenide.SelenideElement;
 import configuration.AppConstants;
 import configuration.Configuration;
+import configuration.SystemConfiguration;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -20,7 +21,7 @@ public class SearchResultActionBarStepsDefinitions {
     @When("^User searches document$")
     public void userSearchesAndSelectDocument() throws IllegalAccessException {
         SearchPage searchPage = page(SearchPage.class);
-        searchPage.selectEntityType(Configuration.getProperty(IDM_DOCUMENT_TYPE));
+        searchPage.selectEntityType(SystemConfiguration.documentType);
         searchPage.selectAttribute(AppConstants.ATTRIBUTES_NAME_TEXT);
         searchPage.selectOperation(AppConstants.EQUALS_OPERATOR);
         searchPage.setTextSearchValue(DocumentDetailPage.documentName);
@@ -202,8 +203,8 @@ public class SearchResultActionBarStepsDefinitions {
     }
 
     @And("^User verifies the file was downloaded$")
-    public void userVerifiesDownloadedFile() throws IllegalAccessException {
-        String filePath = Configuration.getProperty(IDM_FILENAME_PRIMARY);
+    public void userVerifiesDownloadedFile() {
+        String filePath = SystemConfiguration.filePath;
         page(CardListSearchResultPage.class).verifyDownloadedFile(filePath);
     }
 

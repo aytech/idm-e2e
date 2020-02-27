@@ -27,8 +27,8 @@ public class BasePage {
         if (isLoggedIn()) {
             return;
         }
-        String user = Configuration.getProperty(IDM_USER);
-        String password = Configuration.getProperty(IDM_PASSWORD);
+        String user = SystemConfiguration.user;
+        String password = SystemConfiguration.password;
         if (user == null || password == null) {
             throw new Exception("Login credentials not found");
         }
@@ -43,8 +43,8 @@ public class BasePage {
         SelenideElement buttonSubmit = $(By.id(LOGIN_FORM_SUBMIT_GRID));
 
         if (inputUser.exists()) {
-            inputUser.setValue(Configuration.getProperty(IDM_USER));
-            inputPassword.setValue(Configuration.getProperty(IDM_PASSWORD));
+            inputUser.setValue(SystemConfiguration.user);
+            inputPassword.setValue(SystemConfiguration.password);
             buttonSubmit.click();
         }
     }
@@ -159,8 +159,8 @@ public class BasePage {
         return null;
     }
 
-    public static String getPrimaryFileName() throws IllegalAccessException {
-        String fileName = Configuration.getProperty(IDM_FILENAME_PRIMARY);
+    public static String getPrimaryFileName() {
+        String fileName = SystemConfiguration.filePath;
         return fileName.substring(fileName.lastIndexOf(File.separator) + 1);
     }
 

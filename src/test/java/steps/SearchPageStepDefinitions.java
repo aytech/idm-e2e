@@ -4,6 +4,7 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import configuration.AppConstants;
 import configuration.Configuration;
+import configuration.SystemConfiguration;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -83,7 +84,7 @@ public class SearchPageStepDefinitions {
     @Then("^User fills form to search document by name$")
     public void userSelectsDocumentName() throws IllegalAccessException {
         SearchPage page = page(SearchPage.class);
-        page.selectEntityType(Configuration.getProperty(IDM_DOCUMENT_TYPE));
+        page.selectEntityType(SystemConfiguration.documentType);
         page.selectAttribute(AppConstants.ATTRIBUTES_NAME_TEXT);
         page.selectOperation(AppConstants.EQUALS_OPERATOR);
         page.setTextSearchValue(DocumentDetailPage.documentName);
@@ -132,7 +133,7 @@ public class SearchPageStepDefinitions {
     @And("^XQuery for entity type was generated$")
     public void xQueryWasGenerated() throws IllegalAccessException {
         String xQuery = String.format("/%s[@%s = \"%s\"]",
-                Configuration.getProperty(IDM_DOCUMENT_TYPE).replaceAll("\\s", "_"),
+                SystemConfiguration.documentType.replaceAll("\\s", "_"),
                 AppConstants.ATTRIBUTES_NAME_TEXT, DocumentDetailPage.documentName);
         page(SearchPage.class).verifyXQuerySearchValue(xQuery);
     }
