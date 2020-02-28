@@ -43,7 +43,8 @@ public class DocumentDetailPage extends BasePage {
     public void uploadFileToDocument(String filename) {
         waitForLoadingIndicators(ASYNC_TIMEOUT);
         switchToFileTab();
-        $(By.xpath(FILE_UPLOAD_INPUT)).sendKeys(filename);
+        SelenideElement input = $(By.xpath(FILE_UPLOAD_INPUT));
+        input.sendKeys(filename);
     }
 
     public void verifyDocumentTabExists(int noOfTabs) {

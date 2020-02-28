@@ -27,7 +27,7 @@ public class AddDocumentStepDefinitions {
     public void userCreatesNewDocumentWithFile() {
         page(AddDocumentPage.class).addDocument();
         DocumentDetailPage documentDetailPage = page(DocumentDetailPage.class);
-        documentDetailPage.uploadFileToDocument(SystemConfiguration.documentType);
+        documentDetailPage.uploadFileToDocument(SystemConfiguration.filePath);
         documentDetailPage.setNewDocumentName();
         page(DocumentDetailActionBarPage.class).saveDocument();
     }

@@ -4,7 +4,7 @@ import static configuration.AppConstants.*;
 import static pages.DocumentTypePage.documentTypeName;
 
 public class XPathSelectors {
-    public static final String ACTION_BUTTONS = "//button[@data-e2e-id=\"document-action\"]";
+    public static final String ACTION_BUTTONS = "//a[@data-e2e-id=\"document-action\"]";
     public static final String ADD_DOCUMENT_BUTTON = "//button[@data-e2e-id=\"addDocumentButton\"]";
     public static final String ADVANCED_SEARCH_CONTAINER = "//a[@data-e2e-id=\"advanced-search\"]";
     public static final String ADVANCED_SEARCH_TOGGLE = "//a[@data-e2e-id=\"showMoreShortcuts\"]";
@@ -124,6 +124,7 @@ public class XPathSelectors {
     public static final String MAIN_CONTAINER = "//div[@class=\"main-content-container\"]";
     public static final String CONTAINER_FLUID = "//div[@class=\"container-fluid\"]";
     public static final String DOCUMENT_TYPE_DROPDOWN_ADD_DOCUMENT = "//idm-add-document//div//input";
+    public static final String DOCUMENT_TYPE_DROPDOWN_LIST = "//li[@data-e2e-id=\"list-new-document-types\"]";
     public static final String DOCUMENT_TYPE_FILTER_PAGE = "//idm-control-center-configuration-document-type-filter";
     public static final String NEW_FILTER_BUTTON = "//div[@id=\"document-type-filter-actions\"]//button[contains(text(),\"New Filter\")]";
     public static final String DELETE_FILTER_BUTTON = "//div[@id=\"document-type-filter-actions\"]//button[contains(text(),\"Delete\")]";

@@ -67,11 +67,6 @@ public class DocumentDetailActionBarPage extends BasePage {
         waitForLoadingIndicators(DEFAULT_TIMEOUT);
     }
 
-    public void discardCheckOutDocument() {
-        clickActionButton(DISCARD_CHECKOUT_BUTTON_TEXT);
-        clickButtonByText(CONFIRM_BUTTON_TEXT.toUpperCase());
-    }
-
     public void downloadDocument() {
         clickActionButton(AppConstants.DOWNLOAD);
     }

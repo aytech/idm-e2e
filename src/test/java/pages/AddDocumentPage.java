@@ -1,6 +1,7 @@
 package pages;
 
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import configuration.AppConstants;
 import configuration.Configuration;
@@ -10,9 +11,9 @@ import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.$$;
 import static configuration.AppConstants.*;
-import static configuration.XPathSelectors.DOCUMENT_TYPE_NEW_LIST;
-import static configuration.XPathSelectors.MODAL_PAGE_CONTAINER_NEW;
+import static configuration.XPathSelectors.*;
 import static pages.DocumentTypePage.documentTypeName;
 
 public class AddDocumentPage extends BasePage {
@@ -44,10 +45,11 @@ public class AddDocumentPage extends BasePage {
 
     public void selectDocumentTypeForNewDocument() {
         $(By.xpath(XPathSelectors.DOCUMENT_TYPE_DROPDOWN_ADD_DOCUMENT)).setValue((SystemConfiguration.documentType));
-        SelenideElement documentTypeList = $(By.xpath(DOCUMENT_TYPE_NEW_LIST));
-        for (SelenideElement dropDownOption : documentTypeList.$$(By.tagName("option"))) {
-            if (dropDownOption.text().equals(SystemConfiguration.documentType)) {
-                dropDownOption.click();
+        ElementsCollection documentTypeList = $$(By.xpath(DOCUMENT_TYPE_DROPDOWN_LIST));
+        for (SelenideElement dropDownListItem : documentTypeList) {
+            SelenideElement link = dropDownListItem.$(By.tagName("a"));
+            if (link.text().equals(SystemConfiguration.documentType)) {
+                link.click();
                 break;
             }
         }
